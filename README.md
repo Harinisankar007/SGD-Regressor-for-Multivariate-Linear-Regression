@@ -8,28 +8,21 @@ To write a program to predict the price of the house and number of occupants in 
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-
-1.Start
-2.Data Preparation
-3.Hypothesis Definition
-4. Cost Function
-5.Parameter Update Rule
-6.Iterative Training
-7.Model evaluation
-8.End
+1. Import the required packages and print the present data
+2. Print the placement data and salary data. 
+3. Find the null and duplicate values.
+4. Using logistic regression find the predicted values of accuracy , confusion matrices.
+5. Display the results.
 
 ## Program:
-```html
-
-
-Program to implement the multivariate linear regression model for predicting the price of the house
-and number of occupants in the house with SGD regressor.
+```
+/*
+Program to implement the multivariate linear regression model for predicting the price of the house and number of occupants in the house with SGD regressor.
 Developed by: HARINI S
-RegisterNumber: 212224240049
-
+RegisterNumber:  212224240049
+*/
 ```
 ```
-
 import numpy as np
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import SGDRegressor
@@ -37,68 +30,31 @@ from sklearn.multioutput import MultiOutputRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
-
-
-data = fetch_california_housing()
-
-
-x= data.data[:,:3]
-
-
-y=np.column_stack((data.target,data.data[:,6]))
-
-x_train, x_test, y_train,y_test = train_test_split(x,y, test_size = 0.2, random_state =42)
-
-scaler_x = StandardScaler()
-scaler_y = StandardScaler()
-
-x_train = scaler_x.fit_transform(x_train)
-x_test = scaler_x.fit_transform(x_test)
-y_train = scaler_y.fit_transform(y_train)
-y_test = scaler_y.fit_transform(y_test)
-
-sgd = SGDRegressor(max_iter=1000, tol = 1e-3)
-
-multi_output_sgd= MultiOutputRegressor(sgd)
-
-multi_output_sgd.fit(x_train, y_train)
-
-y_pred =multi_output_sgd.predict(x_test)
-
-y_pred = scaler_y.inverse_transform(y_pred)
-y_test = scaler_y.inverse_transform(y_test)
-print(y_pred)
-[[ 1.04860312 35.69231257]
- [ 1.49909521 35.72530255]
- [ 2.35760015 35.50646978]
- ...
- [ 4.47157887 35.06594388]
- [ 1.70991815 35.75406191]
- [ 1.79884624 35.34680017]]
-
-mse = mean_squared_error(y_test,y_pred)
-
+data=fetch_california_housing()
+X=data.data[:,:3]
+Y=np.column_stack((data.target,data.data[:,6]))
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42)
+scaler_X=StandardScaler()
+scaler_Y=StandardScaler()
+X_train=scaler_X.fit_transform(X_train)
+X_test=scaler_X.fit_transform(X_test)
+Y_train=scaler_Y.fit_transform(Y_train)
+Y_test=scaler_Y.fit_transform(Y_test)
+sgd=SGDRegressor(max_iter=1000,tol=1e-3)
+multi_output_sgd=MultiOutputRegressor(sgd)
+multi_output_sgd.fit(X_train,Y_train)
+Y_pred=multi_output_sgd.predict(X_test)
+Y_pred=scaler_Y.inverse_transform(Y_pred)
+Y_test=scaler_Y.inverse_transform(Y_test)
+mse=mean_squared_error(Y_test,Y_pred)
 print("Mean Squared Error:",mse)
-
-Mean Squared Error: 2.560165984862198
-
-print("\nPredictions:\n",y_pred[:5])
-Predictions:
- [[ 1.04860312 35.69231257]
- [ 1.49909521 35.72530255]
- [ 2.35760015 35.50646978]
- [ 2.73967825 35.37568192]
- [ 2.10914107 35.63894336]]
+print("\nPredictions:\n",Y_pred[:5])
 ```
 
 ## Output:
 
-
-mean
-
-![image](https://github.com/user-attachments/assets/ec45c748-c810-43c5-a338-409e7f95add9)
-
-![image](https://github.com/user-attachments/assets/3e47f3aa-9b55-4218-9807-56007c5b445e)
+<img width="441" height="190" alt="image" src="https://github.com/user-attachments/assets/4df89f97-3f45-47ee-bfb4-36a5bec4f727" />
 
 ## Result:
 Thus the program to implement the multivariate linear regression model for predicting the price of the house and number of occupants in the house with SGD regressor is written and verified using python programming.
+
